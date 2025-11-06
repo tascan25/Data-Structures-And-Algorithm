@@ -52,9 +52,74 @@ def reversingDoublyLinkedList():
 
 
 
+# function for inserting the node at the begining of the doubly linkedlist
+
+def insertAtBeg(data):
+    global head
+    newTemp = head
+    newNode = Node(data)
+    newNode.next = newTemp
+    newNode.prev = None
+    if newTemp is not None:
+        newTemp.prev = newNode
+    head = newNode
+
+# function for inserting the node at the end of the doubly linkedlist
+def insertAtEnd(data):
+    global head
+    newTemp = head
+    newNode = Node(data)
+
+    if newTemp is None:
+        head = newNode
+        return head
+    while newTemp.next is not None:
+        newTemp = newTemp.next
+
+    newTemp.next = newNode
+    newNode.prev = newTemp
+    newNode.next = None
+
+# fucntion to insert the at the given position in the doubly linkedlist
+def insertAtPos(data,pos):
+    newTemp = head
+    newNode = Node(data)
+
+    if pos<1:
+        return head
+    if pos==1:
+        insertAtBeg(data)
+    for _ in range(1,pos-1):
+        if newTemp is None:
+            return head
+        newTemp = newTemp.next
+    newNode.next = newTemp.next 
+    newNode.prev = newTemp
+    newTemp.next = newNode
+
+# function for deleting the node from the beigning
+def deleteAtBeg():
+    global head
+    newTemp = head
+    head = newTemp.next
+    head.prev = None
+    del newTemp
+
+    
+
+
 doublyLinkedListTraverse()
-print("\nReading the linkedlist backwards")
-readingBackWards()
-print("\nDoubly linkedlist after reversing it")
-reversingDoublyLinkedList()
+# print("\nReading the linkedlist backwards")
+# readingBackWards()
+# print("\nDoubly linkedlist after reversing it")
+# reversingDoublyLinkedList()
+# doublyLinkedListTraverse()
+
+insertAtBeg(5)
+insertAtEnd(50)
+insertAtPos(60,3)
+print("\n linkedlist after performing all the addition operations.......")
+doublyLinkedListTraverse()
+print("\n")
+deleteAtBeg()
 doublyLinkedListTraverse()
